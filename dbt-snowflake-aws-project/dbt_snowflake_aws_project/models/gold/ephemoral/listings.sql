@@ -1,0 +1,24 @@
+{{ config(
+    materialized='ephemeral'
+) }}
+
+WITH listings AS (
+    SELECT
+        LISTING_ID,
+        HOST_ID,
+        PROPERTY_TYPE,
+        ROOM_TYPE,
+        CITY,
+        COUNTRY,
+        ACCOMMODATES,
+        BEDROOMS,
+        BATHROOMS,
+        PRICE_PER_NIGHT,
+        PRICE_PER_NIGHT_TAG,
+        CREATED_AT AS LISTING_CREATED_AT
+
+    FROM {{ ref('silver_listings') }}
+)
+
+SELECT *
+FROM listings
